@@ -153,7 +153,7 @@ const Home = () => {
          brand: [],
          category: [],
          price: [],
-         sort: 'price-asc',
+         sort: '',
          q
       })
    }

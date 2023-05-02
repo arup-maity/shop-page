@@ -1,0 +1,40 @@
+.filter-sidebar-wrapper {
+    .wrapper-title {
+        border-bottom: 1px solid #b9b9b9;
+    }
+
+    .filter-list {
+        .filter-item {
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        ul {
+            li {
+                font-size: 15px;
+                font-weight: 500;
+                margin-bottom: 5px;
+
+                input {
+                    cursor: pointer;
+                }
+
+                label {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+.filter-sort-input {
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    padding: 3px 15px;
+
+    &:focus {
+        border-color: #7367f0;
+        outline: none;
+    }
+}

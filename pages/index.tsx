@@ -8,24 +8,23 @@ import Header from "@/components/header";
 import RenderProducts from "@/components/ecommerce/shop/RenderProducts";
 // icon
 import { BiSliderAlt } from "react-icons/bi";
+import { MdOutlineClose } from "react-icons/md";
 
 // brand filter array list
 type brandFilter = { value: string; label: string };
 const brandFilter: brandFilter[] = [
-  { value: "redmi", label: "Number A" },
-  { value: "apple", label: "Brand 2" },
-  { value: "samsung", label: "Brand C" },
-  { value: "asus", label: "Miracle" },
-  { value: "brand-empty", label: "Empty" }
+  { value: "redmi", label: "Redmi" },
+  { value: "apple", label: "Apple" },
+  { value: "samsung", label: "Samsung" },
+  { value: "asus", label: "Asus" }
 ];
 // category filter array list
 type categoryFilter = { value: string; label: string };
 const categoryFilter: categoryFilter[] = [
-  { value: "mobile", label: "Number A" },
-  { value: "laptop", label: "Brand 2" },
-  { value: "tablet", label: "Brand C" },
-  { value: "earphone", label: "Miracle" },
-  { value: "category-empty", label: "Empty" }
+  { value: "mobile", label: "Mobile" },
+  { value: "laptop", label: "Laptop" },
+  { value: "tablet", label: "Tablet" },
+  { value: "earphone", label: "Earphone" }
 ];
 // price filter array list
 type priceFilter = { value: { minPrice: number; maxPrice: number }; label: string };
@@ -39,6 +38,7 @@ const priceFilter = [
 
 const Home = () => {
   // state
+  const [openFilter, setOpenFilter] = useState<boolean>(false);
   const [products, setProducts] = useState([{}]);
   const [filter, setFilter] = useState<any>({
     q: "",
@@ -53,7 +53,10 @@ const Home = () => {
   }, [filter]);
 
   const getProduct = () => {
-    const filterByName = productsJson.filter((product) => product.title.toLowerCase().includes(filter.q.toLowerCase()));
+    const filterByName = productsJson.filter(
+      (product) =>
+        product.title.toLowerCase().includes(filter.q.toLowerCase()) || product.brand.toLowerCase().includes(filter.q.toLowerCase()) || product.category.toLowerCase().includes(filter.q.toLowerCase())
+    );
 
     const filteredData = filterByName.filter((product) => {
       if (filter.brand.length > 0 && !filter.brand.includes(product.brand)) {
@@ -166,17 +169,30 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header onSearch={handleSearch} />
-      <div className="container py-5">
+      <div className="container">
+        <div className="py-3">
+          <Breadcrumb>
+            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Shop Page</Breadcrumb.Item>
+          </Breadcrumb>
+        </div>
         <div className="row g-4">
           <div className="col-12 col-lg-3">
-            <div className="filter-sidebar-wrapper bg-white">
+            <div className={`filter-sidebar-wrapper ${openFilter ? "open" : ""}`}>
               <div className="wrapper-title d-flex align-items-center justify-content-between p-3 mb-2">
                 <h5 className="mb-0">Filter</h5>
-                <BiSliderAlt size="20" />
+                <div className="">
+                  <div className="d-block d-lg-none" onClick={() => setOpenFilter((prev) => !prev)}>
+                    <MdOutlineClose size={20} />
+                  </div>
+                </div>
+                <div className="d-none d-lg-block">
+                  <BiSliderAlt size="20" />
+                </div>
               </div>
-              <div className="filter-list">
-                <div className="filter-item p-3">
-                  <div className="filter-title fw-semibold mb-2">Brand</div>
+              <div className="filter-list px-3 pb-3">
+                <div className="filter-item">
+                  <div className="filter-title fw-semibold mb-2">Brands</div>
                   <ul className="list-unstyled m-0">
                     {brandFilter.map((item: any, index: any) => {
                       return (
@@ -190,8 +206,8 @@ const Home = () => {
                     })}
                   </ul>
                 </div>
-
-                <div className="filter-item p-3">
+                <hr />
+                <div className="filter-item">
                   <div className="filter-title fw-semibold mb-2">Category</div>
                   <ul className="list-unstyled m-0">
                     {categoryFilter.map((item: any) => {
@@ -206,8 +222,8 @@ const Home = () => {
                     })}
                   </ul>
                 </div>
-
-                <div className="filter-item p-3">
+                <hr />
+                <div className="filter-item">
                   <div className="filter-title fw-semibold mb-2">Price</div>
                   <ul className="list-unstyled">
                     {priceFilter.map((item: any, index: number) => {
@@ -227,13 +243,11 @@ const Home = () => {
           </div>
           <div className="col-12 col-lg-9">
             <div className="">
-              <div className="d-flex align-items-center justify-content-between mb-3">
+              <div className="d-flex align-items-center justify-content-between gap-4 mb-2">
                 <div className="">
-                  <Breadcrumb>
-                    <Breadcrumb.Item href="">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item href="/home-decoration">Home decoration</Breadcrumb.Item>
-                    <Breadcrumb.Item active>Artificial</Breadcrumb.Item>
-                  </Breadcrumb>
+                  <div className="d-block d-lg-none bg-white py-1 px-3 rounded" onClick={() => setOpenFilter((prev) => !prev)}>
+                    <BiSliderAlt /> Filter
+                  </div>
                 </div>
                 <select name="product-sort" id="product-sort" className="filter-sort-input" onChange={(e) => setFilter({ ...filter, sort: e.target.value })}>
                   <option value="">Sort By</option>
@@ -241,7 +255,6 @@ const Home = () => {
                   <option value="price-asc">Price low to high</option>
                 </select>
               </div>
-
               <div className="product-list">
                 <RenderProducts products={products} />
               </div>

@@ -8,6 +8,7 @@ import Pagination from "@/components/pagination";
 const RenderProducts = ({ products }: any) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [perPage, setPerPage] = useState(6);
+  const productCount = products.length;
 
   return (
     <>
@@ -15,7 +16,7 @@ const RenderProducts = ({ products }: any) => {
         {products &&
           products?.slice((currentPage - 1) * perPage, currentPage * perPage).map((item: any, index: number) => {
             return (
-              <div key={index} className="col-lg-4">
+              <div key={index} className="col-12 col-md-6 col-lg-4">
                 <div className="single-product bg-white">
                   <div className="image-container p-2">
                     <div className="image-50">
@@ -46,7 +47,7 @@ const RenderProducts = ({ products }: any) => {
           })}
       </div>
       <div className="d-flex justify-content-center my-5">
-        <Pagination totalItems={100} perPage={perPage} currentPage={currentPage} onChange={(page) => setCurrentPage(page)} />
+        <Pagination totalItems={productCount} perPage={perPage} currentPage={currentPage} onChange={(page) => setCurrentPage(page)} />
       </div>
     </>
   );

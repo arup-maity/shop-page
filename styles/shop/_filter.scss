@@ -1,40 +1,56 @@
 .filter-sidebar-wrapper {
-    .wrapper-title {
-        border-bottom: 1px solid #b9b9b9;
-    }
+  background-color: white;
+  .wrapper-title {
+    border-bottom: 1px solid #b9b9b9;
+  }
 
-    .filter-list {
-        .filter-item {
-            border-bottom: 1px solid #e8e8e8;
+  .filter-list {
+    ul {
+      li {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 5px;
+
+        input {
+          cursor: pointer;
         }
 
-        ul {
-            li {
-                font-size: 15px;
-                font-weight: 500;
-                margin-bottom: 5px;
-
-                input {
-                    cursor: pointer;
-                }
-
-                label {
-                    cursor: pointer;
-                }
-            }
+        label {
+          cursor: pointer;
         }
+      }
     }
+  }
 }
 
 .filter-sort-input {
-    font-size: 15px;
-    font-weight: 500;
-    border: 1px solid #cecece;
-    border-radius: 5px;
-    padding: 3px 15px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  padding: 3px 15px;
 
-    &:focus {
-        border-color: #7367f0;
-        outline: none;
+  &:focus {
+    border-color: #7367f0;
+    outline: none;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .filter-sidebar-wrapper {
+    position: fixed;
+    width: 425px;
+    background-color: white;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    block-size: 100%;
+    box-shadow: 10px 0 5px -2px #e9e9e9;
+    transform: translateX(-450px);
+    transition: transform 0.5s ease-in-out;
+    &.open {
+      transform: none;
+      transition: transform 0.5s ease-in-out;
     }
+  }
 }

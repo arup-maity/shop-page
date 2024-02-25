@@ -3,6 +3,7 @@
   .pagination-nav-btn {
     width: 35px;
     height: 35px;
+    border: 2px solid #0c0c0c;
     &.disabled {
       opacity: 0.5;
     }
@@ -19,6 +20,19 @@
     }
     &.no-border {
       border: none !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .shop-page-pagination {
+    .pagination-nav-btn {
+      width: 30px;
+      height: 30px;
+    }
+    .pagination-page-item {
+      width: 30px;
+      height: 30px;
     }
   }
 }

@@ -1,0 +1,24 @@
+//
+.shop-page-pagination {
+  .pagination-nav-btn {
+    width: 35px;
+    height: 35px;
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
+  .pagination-page-item {
+    width: 35px;
+    height: 35px;
+    color: #b1b1b1;
+    border: 1px solid #b1b1b1;
+    &.active {
+      color: #fff;
+      background-color: #7367f0;
+      border-color: #7367f0;
+    }
+    &.no-border {
+      border: none !important;
+    }
+  }
+}

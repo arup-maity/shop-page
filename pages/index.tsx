@@ -197,7 +197,7 @@ const Home = () => {
                     {brandFilter.map((item: any, index: any) => {
                       return (
                         <li key={index}>
-                          <input type="checkbox" id={item.value} checked={filter.brand.includes(item.value)} onChange={(event) => handleBrand(event, item.value)} />
+                          <input type="checkbox" id={item.value} className="filter-checkbox-input" checked={filter.brand.includes(item.value)} onChange={(event) => handleBrand(event, item.value)} />
                           <label htmlFor={item.value} className="ms-2">
                             {item.label}
                           </label>
@@ -213,7 +213,13 @@ const Home = () => {
                     {categoryFilter.map((item: any) => {
                       return (
                         <li key={item.value}>
-                          <input type="checkbox" id={item.value} checked={filter.category.includes(item.value)} onChange={(event) => handleCategory(event, item.value)} />
+                          <input
+                            type="checkbox"
+                            id={item.value}
+                            className="filter-checkbox-input"
+                            checked={filter.category.includes(item.value)}
+                            onChange={(event) => handleCategory(event, item.value)}
+                          />
                           <label htmlFor={item.value} className="ms-2">
                             {item.label}
                           </label>
@@ -229,7 +235,13 @@ const Home = () => {
                     {priceFilter.map((item: any, index: number) => {
                       return (
                         <li key={index}>
-                          <input type="checkbox" id={`id-${index}`} checked={filter.price.includes(item.value)} onChange={(event) => handlePrice(event, item.value)} />
+                          <input
+                            type="checkbox"
+                            id={`id-${index}`}
+                            className="filter-checkbox-input"
+                            checked={filter.price.includes(item.value)}
+                            onChange={(event) => handlePrice(event, item.value)}
+                          />
                           <label htmlFor={`id-${index}`} className="ms-2">
                             {item.label}
                           </label>
@@ -249,7 +261,7 @@ const Home = () => {
                     <BiSliderAlt /> Filter
                   </div>
                 </div>
-                <select name="product-sort" id="product-sort" className="filter-sort-input" onChange={(e) => setFilter({ ...filter, sort: e.target.value })}>
+                <select name="product-sort" id="product-sort" className="filter-sort-input form-select" onChange={(e) => setFilter({ ...filter, sort: e.target.value })}>
                   <option value="">Sort By</option>
                   <option value="price-desc">Price high to low</option>
                   <option value="price-asc">Price low to high</option>
